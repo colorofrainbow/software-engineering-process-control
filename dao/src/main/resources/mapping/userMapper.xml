@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.modules.dao.UserDao">
+    <resultMap id="userMap" type="java.util.Map">
+        <result column="username" property="username" jdbcType="VARCHAR"></result>
+        <result column="password" property="password" jdbcType="VARCHAR"></result>
+    </resultMap>
+    <select id="selectByUsername" parameterType="java.util.Map" resultType="java.lang.String">
+        select password from user where username=#{username};
+    </select>
+    <select id="selectUserList" resultMap="userMap">
+        select username,password from user where username=#{username};
+    </select>
+
+    <update id="updatePassword" parameterType="java.util.Map" >
+        update user set
+        <if test="password!=null and password!=''">
+            password=#{password}
+        </if>
+        where username=#{username}
+    </update>
+
+    <delete id="deleteUserByName" parameterType="java.lang.String">
+        delete user where username=#{username}
+    </delete>
+</mapper>

@@ -1,0 +1,4 @@
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+node.master: true
+node.data: true
